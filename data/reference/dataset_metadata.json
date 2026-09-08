@@ -1,0 +1,145 @@
+{
+  "dataset_name": "ETAFlow Synthetic Logistics Delivery Dataset",
+  "version": "1.0.0",
+  "generation_timestamp": "2026-09-08T07:08:50.607698+00:00",
+  "generator_script": "scripts/generate_dataset.py",
+  "random_seed": 42,
+  "total_records": 100000,
+  "total_columns": 55,
+  "configured_date_range": {
+    "start_date": "2023-01-01",
+    "end_date": "2025-12-31"
+  },
+  "target_definitions": {
+    "regression_target": "actual_delivery_days (Total duration in days from order placement to delivery)",
+    "classification_target": "is_delayed (Binary: 1 if delivery_delay_days > 0 else 0)",
+    "delay_severity_target": "delivery_delay_days (max(actual_delivery_days - promised_delivery_days, 0))"
+  },
+  "delay_class_balance": {
+    "total_shipments": 100000,
+    "delayed_shipments": 26267,
+    "on_time_shipments": 73733,
+    "delay_rate_percentage": 26.27
+  },
+  "missing_value_rates_pct": {
+    "holiday_name": 94.51,
+    "traffic_level": 1.85,
+    "congestion_index": 1.85,
+    "weather_condition": 2.3,
+    "weather_risk_score": 2.3,
+    "road_condition": 1.23,
+    "carrier_historical_delay_rate": 1.46,
+    "route_historical_delay_rate": 1.77
+  },
+  "numerical_distributions": {
+    "distance_km": {
+      "mean": 1322.5,
+      "std": 640.2,
+      "min": 15.5,
+      "p25": 821.2,
+      "median": 1320.0,
+      "p75": 1743.62,
+      "p95": 2366.2,
+      "max": 3696.3
+    },
+    "package_weight_kg": {
+      "mean": 4.1,
+      "std": 5.11,
+      "min": 0.15,
+      "p25": 1.33,
+      "median": 2.56,
+      "p75": 4.91,
+      "p95": 12.69,
+      "max": 120.0
+    },
+    "actual_delivery_days": {
+      "mean": 2.49,
+      "std": 1.45,
+      "min": 0.25,
+      "p25": 1.36,
+      "median": 2.3,
+      "p75": 3.23,
+      "p95": 5.06,
+      "max": 15.87
+    },
+    "promised_delivery_days": {
+      "mean": 3.79,
+      "std": 2.15,
+      "min": 0.6,
+      "p25": 2.1,
+      "median": 3.4,
+      "p75": 5.1,
+      "p95": 7.9,
+      "max": 16.0
+    },
+    "delivery_delay_days": {
+      "mean": 0.35,
+      "std": 0.88,
+      "min": 0.0,
+      "p25": 0.0,
+      "median": 0.0,
+      "p75": 0.08,
+      "p95": 2.16,
+      "max": 13.77
+    }
+  },
+  "categorical_distributions": {
+    "transport_mode": {
+      "Road": 62684,
+      "Rail": 21993,
+      "Air": 14080,
+      "Sea": 1243
+    },
+    "carrier": {
+      "Delhivery": 27930,
+      "BlueDart": 21967,
+      "Ekart Logistics": 17858,
+      "DTDC": 11994,
+      "Xpressbees": 8006
+    },
+    "product_category": {
+      "Electronics": 26206,
+      "Apparel": 23918,
+      "Home & Kitchen": 16039,
+      "Healthcare": 9889,
+      "Automotive Parts": 7821
+    },
+    "priority_level": {
+      "Medium": 50148,
+      "High": 24095,
+      "Low": 19732,
+      "Critical": 6025
+    },
+    "service_level": {
+      "Standard": 35114,
+      "Express": 34994,
+      "Next Day": 15954,
+      "Economy Surface": 9850,
+      "Same Day": 4088
+    },
+    "delivery_zone": {
+      "Metro": 35838,
+      "Tier 1": 30875,
+      "Tier 2": 25928,
+      "Tier 3": 7149,
+      "Rural / ODA": 210
+    },
+    "weather_condition": {
+      "Clear": 63521,
+      "Rainy": 18143,
+      "Heavy Rain / Storm": 7946,
+      "Heatwave": 4751,
+      "nan": 2303
+    }
+  },
+  "validation_summary": {
+    "total_rows": 100000,
+    "unique_shipments": 100000,
+    "delayed_shipments": 26267,
+    "delay_percentage": 26.27,
+    "mean_delivery_days": 2.49,
+    "median_delivery_days": 2.3,
+    "mean_delay_days": 0.35,
+    "max_delay_days": 13.77
+  }
+}

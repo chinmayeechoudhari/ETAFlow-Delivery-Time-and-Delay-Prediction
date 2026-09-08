@@ -1,0 +1,56 @@
+column_name,data_type,description,unit,role,allowed_values,nullable,generation_logic
+shipment_id,string,Unique alphanumeric tracking identifier for each shipment,None,identifier,SHP00000001 to SHP99999999,false,Zero-padded sequential identifier
+order_date,datetime,Timestamp when customer placed the order,YYYY-MM-DD HH:MM:SS,feature,Configurable date range (2023-01-01 to 2025-12-31),false,Uniform stochastic sample across configured date interval
+pickup_datetime,datetime,Timestamp when carrier picked up the package from origin facility,YYYY-MM-DD HH:MM:SS,feature,"order_date + [30 mins, 8 hours]",false,order_date plus warehouse intake lag
+estimated_dispatch_datetime,datetime,Target dispatch milestone scheduled by facility SLA,YYYY-MM-DD HH:MM:SS,feature,"pickup_datetime + [4, 14] hours",false,SLA dispatch commitment
+actual_dispatch_datetime,datetime,Timestamp when package physically departed origin warehouse,YYYY-MM-DD HH:MM:SS,feature,pickup_datetime + warehouse_processing + loading_time,false,pickup_datetime plus processing and loading duration
+delivery_datetime,datetime,Timestamp when package was successfully delivered to consignee,YYYY-MM-DD HH:MM:SS,feature / metadata,actual_dispatch_datetime + transit_hours + handling,false,Physical transit arrival milestone
+day_of_week,string,Day of week when order was initiated,None,feature,"Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday",false,Extracted from order_date
+month,integer,Calendar month of order,1 to 12,feature,1 to 12,false,Extracted from order_date
+quarter,integer,Financial / calendar quarter of order,1 to 4,feature,1 to 4,false,Extracted from order_date
+is_weekend,integer,Binary indicator if order was placed on Saturday or Sunday,"Binary [0, 1]",feature,"0, 1",false,Derived from order_date day of week
+is_holiday,integer,Binary indicator if order date falls within a major Indian holiday window,"Binary [0, 1]",feature,"0, 1",false,"Matched against Indian holiday calendar (Diwali, Holi, Dussehra, etc.)"
+holiday_name,string,Name of the national/cultural holiday if applicable,None,feature,"Diwali Festival Week, Holi, Dussehra, Republic Day, Independence Day, etc.",true,Lookup from Indian holiday schedule; null for standard non-holiday days
+package_weight_kg,float,Gross chargeable weight of shipment in kilograms,kg,feature,0.15 to 120.0,false,Log-normal distribution adjusted by product category density factor
+package_volume_cm3,float,External cubic dimension volume of package in cubic centimeters,cm³,feature,500.0 to 850000.0,false,"Correlated with weight, item count, and category bulkiness"
+package_count,integer,Total number of individual items/cartons in consignment,count,feature,1 to 8,false,"Categorical discrete distribution (mostly 1, long tail up to 8)"
+product_category,string,Merchandise classification,None,feature,"Electronics, Apparel, Home & Kitchen, Healthcare, Automotive Parts, Books & Media, Groceries & FMCG, Industrial Equipment",false,Market-calibrated categorical distribution
+priority_level,string,Consignment priority tier specified by customer or shipper,None,feature,"Low, Medium, High, Critical",false,Categorical distribution calibrated to e-commerce/freight tiers
+shipment_value_inr,float,Declared commercial invoice value in Indian Rupees (INR),INR (₹),feature,150.0 to 350000.0,false,Log-normal distribution conditioned on product category median
+origin_city,string,Dispatch logistics hub city name,None,feature,"28 major Indian commercial hubs (Mumbai, Delhi, Bengaluru, Pune, etc.)",false,Weighted sampling reflecting metro freight outbound generation
+origin_state,string,State or Union Territory of dispatch hub,None,feature,"Maharashtra, Delhi, Karnataka, Telangana, Tamil Nadu, etc.",false,Deterministic lookup from origin_city
+origin_latitude,float,Geographic latitude coordinate of dispatch hub,Degrees North,feature,8.0 to 37.0,false,Deterministic lookup from city registry
+origin_longitude,float,Geographic longitude coordinate of dispatch hub,Degrees East,feature,68.0 to 98.0,false,Deterministic lookup from city registry
+destination_city,string,Consignee delivery destination hub city name,None,feature,28 major Indian commercial hubs,false,Weighted sampling with realistic inter-city freight demand patterns
+destination_state,string,State or Union Territory of delivery destination,None,feature,"Maharashtra, Delhi, Karnataka, Telangana, Tamil Nadu, etc.",false,Deterministic lookup from destination_city
+destination_latitude,float,Geographic latitude coordinate of delivery destination,Degrees North,feature,8.0 to 37.0,false,Deterministic lookup from city registry
+destination_longitude,float,Geographic longitude coordinate of delivery destination,Degrees East,feature,68.0 to 98.0,false,Deterministic lookup from city registry
+distance_km,float,Estimated road/transit route distance in kilometers,km,feature,15.0 to 3500.0,false,Vectorized Haversine distance multiplied by road network circuity factor
+delivery_zone,string,Urban density and logistical accessibility tier of destination,None,feature,"Metro, Tier 1, Tier 2, Tier 3, Rural / ODA",false,Mapped from destination city tier with realistic neighborhood variance
+fulfillment_center,string,Origin fulfillment node code,None,feature,"FC-BOM-01, FC-DEL-01, FC-BLR-01, FC-HYD-01, etc.",false,Deterministic facility lookup by origin city
+transport_mode,string,Primary mode of long-haul / line-haul transportation,None,feature,"Road, Rail, Air, Sea",false,Distance-conditioned mode selection (Road dominates domestic freight)
+carrier,string,3PL or dedicated logistics provider handling the consignment,None,feature,"BlueDart, Delhivery, Ekart Logistics, DTDC, Xpressbees, Shadowfax, TCI Express, SafeXpress",false,Market share weighted categorical distribution
+vehicle_type,string,Fleet equipment / vehicle assigned for transit,None,feature,"2-Wheeler, Small Commercial Van, LCV, HCV, Multi-Axle Container, Belly Cargo, Cargo Aircraft, Freight Train, Feeder Vessel",false,Strictly constrained to be compatible with transport_mode and package weight
+route_type,string,Topographical and logistical classification of transit route,None,feature,"Urban Last-Mile, Inter-City Highway, National Trunk Corridor, Semi-Urban / Feeder, Hilly / Remote Terrain",false,Categorical sampling based on route distance and hub geography
+warehouse_type,string,Classification of origin dispatch facility,None,feature,"Local Fulfillment Center (FC), Regional Distribution Center (RDC), Mother Hub, Sort Center (SC)",false,Categorical distribution across facility tiers
+service_level,string,Commercial delivery SLA agreement chosen by customer,None,feature,"Same Day, Next Day, Express, Standard, Economy Surface",false,Categorical distribution calibrated to e-commerce delivery options
+customer_type,string,Customer commercial segment,None,feature,"B2C, D2C, B2B, Enterprise",false,Categorical distribution across commercial customer personas
+warehouse_processing_hours,float,"Duration spent in origin warehouse for picking, packing, sorting, and staging",hours,feature,1.5 to 48.0,false,Log-normal processing time with holiday demand multipliers and item count scaling
+loading_time_hours,float,Duration required to cross-dock and load consignment onto transit vehicle,hours,feature,0.2 to 8.0,false,Conditioned on vehicle type and package weight
+handling_time_hours,float,Specialized handling and inspection duration,hours,feature,0.1 to 5.0,false,"Conditioned on item fragility, dangerous goods check, and priority level"
+customs_clearance_hours,float,Regulatory inspection and customs processing hours (0.0 for domestic),hours,feature,0.0 (domestic) to 48.0 (SEZ / bonded courier),false,0.0 for 98.5% domestic; 12-48 hours for 1.5% cross-border / SEZ freight
+number_of_stops,integer,Number of intermediate cross-dock hubs or sort centers along line-haul route,count,feature,0 to 7,false,Proportional to distance and hub-and-spoke consolidation (0 for direct/air)
+route_complexity_score,float,"Engineered route difficulty index capturing terrain, tolls, and elevation",Score (1.0 to 5.0),feature,1.0 to 5.0,false,"Derived from distance, number of stops, and hilly terrain factors"
+traffic_level,string,Qualitative traffic congestion severity along corridor,None,feature,"Low, Moderate, High, Severe",true,Categorized from congestion_index; ~1.8% missing due to telematics dropout
+congestion_index,float,"Continuous normalized traffic congestion index (0.0 = clear, 1.0 = gridlock)","Index [0.0, 1.0]",feature,0.05 to 0.98,true,"Simulated from city density, peak shopping months, holidays, and urban routes"
+weather_condition,string,Meteorological weather condition encountered during line-haul transit,None,feature,"Clear, Rainy, Heavy Rain / Storm, Fog / Low Visibility, Heatwave, Cyclonic / Gale",true,"Seasonally correlated (Monsoon Jun-Sep, North India Winter Fog Dec-Jan); ~2.4% missing"
+weather_risk_score,float,"Meteorological disruption probability index (0.0 = benign, 1.0 = severe catastrophe)","Score [0.0, 1.0]",feature,0.01 to 0.99,true,Continuous disruption probability paired with weather condition
+road_condition,string,Highway / road infrastructure surface state,None,feature,"Good, Average, Poor, Under Construction",true,Conditioned on route type and monsoon rainfall; ~1.2% missing
+carrier_historical_delay_rate,float,"Prior rolling 90-day delay rate for assigned carrier (cold feature, zero target leakage)","Probability [0.0, 1.0]",feature,0.08 to 0.40,true,Historical carrier performance benchmark + noise; ~1.5% missing (cold start)
+route_historical_delay_rate,float,Prior historical delay probability on this origin-destination corridor,"Probability [0.0, 1.0]",feature,0.06 to 0.45,true,Historical lane delay benchmark + noise; ~1.8% missing (new lanes)
+warehouse_historical_delay_rate,float,Prior historical dispatch delay rate for origin fulfillment center,"Probability [0.0, 1.0]",feature,0.05 to 0.38,false,Facility baseline prior rate
+destination_historical_delay_rate,float,Prior delivery exception rate in destination delivery zone,"Probability [0.0, 1.0]",feature,0.07 to 0.45,false,Destination delivery zone baseline prior rate
+promised_delivery_days,float,Target SLA delivery duration promised to customer at order placement,days,feature / SLA baseline,0.5 to 25.0,false,"Customer SLA policy based on service level, distance tier, and priority level"
+actual_delivery_days,float,Actual elapsed time from order placement to customer delivery in fractional days,days,target (regression),0.25 to 30.0,false,Total elapsed physical hours / 24.0 (warehouse + loading + transit + customs + delays)
+delivery_delay_days,float,"Days overdue beyond promised delivery SLA: max(actual_delivery_days - promised_delivery_days, 0)",days,target (regression / risk),0.0 to 20.0,false,"Mathematically enforced as max(actual_delivery_days - promised_delivery_days, 0)"
+is_delayed,integer,Binary classification target indicating whether shipment breached promised SLA (1) or was on-time (0),"Binary [0, 1]",target (classification),"0, 1",false,Strictly defined as 1 if delivery_delay_days > 0 else 0 (~20-35% realistic positive class balance)

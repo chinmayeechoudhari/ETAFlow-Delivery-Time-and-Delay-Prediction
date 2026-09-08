@@ -1,0 +1,112 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "agents_rules_graphify",
+      "label": "rules/graphify.md",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "graphify \u2014 Dedicated Context Knower",
+      "file_type": "document",
+      "frontmatter": {
+        "trigger": "always_on",
+        "description": "Consult the graphify knowledge graph at graphify-out/ for codebase and architecture questions."
+      },
+      "node_kind": "page",
+      "norm_label": "rules/graphify.md",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_rules_graphify_graphify_dedicated_context_knower",
+      "label": "graphify \u2014 Dedicated Context Knower",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "graphify \u2014 Dedicated Context Knower",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "graphify \u2014 dedicated context knower",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L6"
+    },
+    {
+      "id": "agents_rules_graphify_role_and_boundaries",
+      "label": "Role and Boundaries",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "graphify \u2014 Dedicated Context Knower",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "role and boundaries",
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L10"
+    },
+    {
+      "id": "agents_workflows_graphify",
+      "label": "workflows/graphify.md",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "workflows/graphify.md",
+      "file_type": "document",
+      "frontmatter": {
+        "name": "graphify",
+        "description": "Turn any folder of files into a navigable knowledge graph"
+      },
+      "node_kind": "page",
+      "norm_label": "workflows/graphify.md",
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "agents_workflows_graphify_workflow_graphify_refresh_context_knower",
+      "label": "Workflow: graphify \u2014 Refresh Context Knower",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "workflows/graphify.md",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "workflow: graphify \u2014 refresh context knower",
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L6"
+    }
+  ],
+  "links": [
+    {
+      "source": "agents_rules_graphify",
+      "target": "agents_rules_graphify_graphify_dedicated_context_knower",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_rules_graphify_graphify_dedicated_context_knower",
+      "target": "agents_rules_graphify_role_and_boundaries",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/rules/graphify.md",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "agents_workflows_graphify",
+      "target": "agents_workflows_graphify_workflow_graphify_refresh_context_knower",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".agents/workflows/graphify.md",
+      "source_location": "L6",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "56d48a608764fa2c5d23faf2b59f3ba344fb6f5a"
+}
