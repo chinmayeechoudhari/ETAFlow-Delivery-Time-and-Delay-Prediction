@@ -1,0 +1,21 @@
+column_name,cardinality,most_frequent_value,frequency,percentage,rare_category_count,integrity_flags
+day_of_week,7,Sunday,14559,14.56,0,Clean
+holiday_name,10,Diwali Festival Week,2033,37.04,0,Clean
+product_category,8,Electronics,26206,26.21,0,Clean
+priority_level,4,Medium,50148,50.15,0,Clean
+origin_city,28,Delhi,12093,12.09,0,Clean
+origin_state,18,Maharashtra,21340,21.34,0,Clean
+destination_city,28,Delhi,10828,10.83,0,Clean
+destination_state,18,Maharashtra,20776,20.78,0,Clean
+delivery_zone,5,Metro,35838,35.84,0,Clean
+fulfillment_center,28,FC-DEL-01,12093,12.09,0,Clean
+transport_mode,4,Road,62684,62.68,0,Clean
+carrier,8,Delhivery,27930,27.93,0,Clean
+vehicle_type,11,Heavy Commercial Vehicle (HCV),26730,26.73,0,Clean
+route_type,5,Inter-City Highway,40320,40.32,0,Clean
+warehouse_type,4,Local Fulfillment Center (FC),35219,35.22,0,Clean
+service_level,5,Standard,35114,35.11,0,Clean
+customer_type,4,B2C,54817,54.82,0,Clean
+traffic_level,4,Moderate,45688,46.55,0,Clean
+weather_condition,6,Clear,63521,65.02,0,Clean
+road_condition,4,Good,61392,62.16,0,Clean

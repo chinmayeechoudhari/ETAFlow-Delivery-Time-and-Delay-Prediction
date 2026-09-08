@@ -1,0 +1,91 @@
+{
+  "audit_meta": {
+    "audit_timestamp": "2026-09-08T16:26:31.128228+00:00",
+    "dataset_path": "D:\\Project\\ETAFlow \u2014 Intelligent Delivery ETA & Delay Prediction Platform\\data\\raw\\shipments.csv",
+    "data_dictionary_path": "D:\\Project\\ETAFlow \u2014 Intelligent Delivery ETA & Delay Prediction Platform\\data\\reference\\data_dictionary.csv",
+    "dataset_metadata_path": "D:\\Project\\ETAFlow \u2014 Intelligent Delivery ETA & Delay Prediction Platform\\data\\reference\\dataset_metadata.json",
+    "python_version": "3.13.9",
+    "pandas_version": "2.3.3",
+    "numpy_version": "2.3.5"
+  },
+  "dataset_shape": {
+    "rows": 100000,
+    "columns": 55
+  },
+  "overall_verdict": "ML READY WITH WARNINGS",
+  "scorecard": {
+    "Schema integrity": "PASS",
+    "Data types": "PASS",
+    "Metadata consistency": "PASS",
+    "Missingness": "PASS",
+    "Numerical distributions": "PASS",
+    "Categorical distributions": "PASS",
+    "Outliers": "PASS",
+    "Regression target": "PASS",
+    "Classification target": "PASS",
+    "Target consistency": "PASS",
+    "Feature-target signal": "PASS",
+    "Data leakage": "PASS",
+    "Temporal integrity": "PASS",
+    "Geographical integrity": "PASS",
+    "Domain constraints": "PASS",
+    "Multicollinearity": "WARNING",
+    "Synthetic realism": "PASS",
+    "Duplicate analysis": "PASS"
+  },
+  "summary_counts": {
+    "PASS": 17,
+    "WARNING": 1,
+    "ISSUE": 0
+  },
+  "targets": {
+    "regression": {
+      "name": "actual_delivery_days",
+      "mean": 2.49,
+      "median": 2.3,
+      "std": 1.45,
+      "min": 0.25,
+      "max": 15.87
+    },
+    "classification": {
+      "name": "is_delayed",
+      "delayed_count": 26267,
+      "on_time_count": 73733,
+      "delay_rate_pct": 26.27
+    }
+  },
+  "findings": {
+    "PASS": [
+      "Dataset shape matches expected specification: 100,000 rows \u00d7 55 columns.",
+      "Zero duplicate column names in schema.",
+      "Primary key 'shipment_id' is 100% unique across all 100,000 records.",
+      "Data dictionary provides 100% coverage of all 55 dataset columns with zero undocumented features.",
+      "Dataset metadata accurately reflects dataset dimensions (100,000 \u00d7 55) and delay rate (26.27%).",
+      "Zero missing values in all targets, identifiers, and core routing features.",
+      "Identified realistic controlled missingness in 8 features: telematics dropout (~1.2-2.3%), cold-start rates (~1.5-1.8%), and structural nulls in holiday_name (94.5%).",
+      "All numerical features exhibit non-zero variance, valid physical bounds, and realistic spread.",
+      "All categorical features possess clean string representations without inconsistent whitespaces or single-category collapses.",
+      "Outliers in weight (max 120 kg), distance (max ~3,700 km), and transit duration represent legitimate logistics heavy-tailed phenomena rather than impossible data corruption.",
+      "Regression target 'actual_delivery_days' demonstrates realistic logistics spread (mean=2.49d, median=2.30d, range=[0.25d, 15.87d], std=1.45d).",
+      "Classification target 'is_delayed' exhibits realistic domain balance: 26.27% delayed (26,267 positive cases) vs 73.73% on-time.",
+      "Mathematical target coupling strictly confirmed across all 100,000 rows (max difference: 0.0100 days, well within float rounding tolerance).",
+      "Binary target 'is_delayed' perfectly mirrors 'delivery_delay_days > 0' with zero label inconsistencies.",
+      "Strong, realistic predictive signal detected: distance_km (r=0.588), stops, congestion, and operational times provide rich non-trivial signal without direct target leakage.",
+      "Nonlinear domain dynamics confirmed: severe congestion increases delay rate from ~18% in low traffic to ~48% in severe traffic; severe weather risk elevates delay rates monotonically.",
+      "Categorical target slices reflect domain reality: Air mode achieves fastest delivery (avg ~1.1d), Same Day service meets tight SLAs, and BlueDart exhibits lower delay rates than budget surface carriers.",
+      "Data leakage boundaries formalized: 38 features are strictly safe at Point A (Order Creation), 13 additional operational features are valid at Point B (Vehicle Dispatch), and 4 target/delivery fields are flagged as post-delivery LEAKAGE.",
+      "100% strictly monotonic datetime chronology verified (order <= pickup <= dispatch <= delivery).",
+      "Uniform temporal distribution verified spanning 2023-01-01 to 2025-12-30 across years [2023, 2025, 2024].",
+      "All geographical coordinates verified within Indian territory across 28 validated commercial hubs.",
+      "Distance calculation satisfies logistics realism (range [15.5 km, 3696.3 km], road circuity correctly exceeds straight-line Haversine).",
+      "100% compliance in fleet-mode operational compatibility (no impossible combinations like Air transport with 2-Wheelers).",
+      "Severe weather conditions logically degrade road infrastructure states.",
+      "Synthetic realism validated: No single feature trivially explains target variance (max single R\u00b2 = 0.346); dataset incorporates multi-factor non-linearities and heavy-tailed operational shocks.",
+      "Zero duplicate rows found across all 100,000 records."
+    ],
+    "WARNING": [
+      "Identified 5 collinear feature pair(s) with |r| > 0.70 (e.g. package_weight_kg \u2194 package_volume_cm3: r=0.94)."
+    ],
+    "ISSUE": []
+  }
+}

@@ -1,0 +1,56 @@
+column_name,role,available_at_point_a_booking,available_at_point_b_dispatch,leakage_risk,reasoning
+shipment_id,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+order_date,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+pickup_datetime,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+estimated_dispatch_datetime,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+actual_dispatch_datetime,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+delivery_datetime,post_delivery_timestamp,NO,NO,LEAKAGE (Target / Outcome),Milestone known only after delivery is completed. Must be strictly excluded from ML input features.
+day_of_week,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+month,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+quarter,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+is_weekend,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+is_holiday,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+holiday_name,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+package_weight_kg,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+package_volume_cm3,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+package_count,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+product_category,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+priority_level,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+shipment_value_inr,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+origin_city,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+origin_state,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+origin_latitude,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+origin_longitude,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+destination_city,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+destination_state,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+destination_latitude,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+destination_longitude,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+distance_km,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+delivery_zone,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+fulfillment_center,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+transport_mode,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+carrier,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+vehicle_type,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+route_type,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+warehouse_type,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+service_level,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+customer_type,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+warehouse_processing_hours,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+loading_time_hours,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+handling_time_hours,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+customs_clearance_hours,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+number_of_stops,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+route_complexity_score,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+traffic_level,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+congestion_index,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+weather_condition,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+weather_risk_score,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+road_condition,feature,NO,YES,"REVIEW (Safe at Dispatch, Leakage at Booking)","Measured during hub staging and dispatch. Valid for Line-Haul ETA prediction (Point B), but unavailable at initial checkout (Point A)."
+carrier_historical_delay_rate,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+route_historical_delay_rate,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+warehouse_historical_delay_rate,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+destination_historical_delay_rate,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+promised_delivery_days,feature,YES,YES,SAFE (Point A & B),Known at order placement / booking time before physical fulfillment begins.
+actual_delivery_days,target,NO,NO,LEAKAGE (Target / Outcome),Milestone known only after delivery is completed. Must be strictly excluded from ML input features.
+delivery_delay_days,target,NO,NO,LEAKAGE (Target / Outcome),Milestone known only after delivery is completed. Must be strictly excluded from ML input features.
+is_delayed,target,NO,NO,LEAKAGE (Target / Outcome),Milestone known only after delivery is completed. Must be strictly excluded from ML input features.

@@ -2,11 +2,14 @@
   "0": "graphify — Dedicated Context Knower",
   "1": "workflows/graphify.md",
   "2": "generate_dataset.py",
-  "3": "DataFrame",
-  "4": "._generate_geography",
-  "5": ".generate",
-  "6": "LogisticsDatasetGenerator",
-  "7": "._generate_operational_and_environment",
-  "8": "._generate_temporal_scaffold",
-  "9": "._inject_controlled_missingness"
+  "3": "LogisticsDatasetGenerator",
+  "4": "ETAFlow — Comprehensive Machine Learning Readiness Audit Report",
+  "5": ".run",
+  "6": "DataFrame",
+  "7": "DatasetAuditor",
+  "8": "20. Categorized Recommendations & Next Steps",
+  "9": "audit_dataset.py",
+  "10": "14. Data Leakage & Operational Horizon Analysis",
+  "11": "9. Target Variable Audit (Regression & Classification)",
+  "12": "19. ML Readiness Scorecard (17 Dimensions)"
 }

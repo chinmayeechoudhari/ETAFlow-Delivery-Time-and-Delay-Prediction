@@ -1,4 +1,12 @@
 {
   "0": "graphify — Dedicated Context Knower",
-  "1": "workflows/graphify.md"
+  "1": "workflows/graphify.md",
+  "2": "generate_dataset.py",
+  "3": "DataFrame",
+  "4": "._generate_geography",
+  "5": ".generate",
+  "6": "LogisticsDatasetGenerator",
+  "7": "._generate_operational_and_environment",
+  "8": "._generate_temporal_scaffold",
+  "9": "._inject_controlled_missingness"
 }
