@@ -1,0 +1,38 @@
+# ==========================================
+# ETAFlow - Python Dependencies
+# ==========================================
+
+# Data Processing
+pandas
+numpy
+
+# Machine Learning
+scikit-learn
+xgboost
+lightgbm
+
+# Backend / API
+fastapi
+uvicorn
+pydantic
+
+# Database
+sqlalchemy
+psycopg2-binary
+alembic
+
+# MLOps
+mlflow
+dvc
+
+# Explainable AI
+shap
+
+# ML Monitoring
+evidently
+
+# Testing
+pytest
+
+# Code Quality
+ruff
