@@ -1,7 +1,7 @@
 # Graph Report - ETAFlow — Intelligent Delivery ETA & Delay Prediction Platform  (2026-09-08)
 
 ## Corpus Check
-- 7 files · ~34,888 words
+- 7 files · ~34,826 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -10,7 +10,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `b63af911`
+- Built from commit: `b42c817c`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
