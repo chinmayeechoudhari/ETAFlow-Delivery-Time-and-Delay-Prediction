@@ -1,0 +1,131 @@
+# ==============================================================================
+# ETAFlow Feature Configuration: Prediction Point B (Dispatch / Vehicle Departure)
+# ==============================================================================
+# This configuration defines features available when the consignment departs
+# the origin fulfillment center/hub.
+# Includes Point A features PLUS realized warehouse processing, loading durations,
+# departure delay, intermediate route complexity, and real-time transit telematics.
+# Strictly excludes all post-delivery outcomes.
+# ==============================================================================
+
+prediction_horizon: dispatch
+description: "Features known at vehicle departure from origin hub including realized warehouse times and telematics."
+version: "1.0.0"
+source_dataset_version: "v1"
+
+# Unique consignment identifier (metadata index, never used as an ML predictor)
+id_column: shipment_id
+
+# Target columns (strictly isolated into targets artifact, never in feature matrix)
+target_columns:
+  regression_target: actual_delivery_days
+  classification_target: is_delayed
+  secondary_target: delivery_delay_days
+
+# Explicitly excluded columns (post-delivery outcomes)
+excluded_columns:
+  - delivery_datetime
+  - actual_delivery_days
+  - delivery_delay_days
+  - is_delayed
+
+# Raw timestamp columns available at dispatch
+timestamp_columns:
+  - order_date
+  - pickup_datetime
+  - estimated_dispatch_datetime
+  - actual_dispatch_datetime
+
+# Raw numerical features available at dispatch
+raw_numerical_features:
+  # Base booking numerical features
+  - package_weight_kg
+  - package_volume_cm3
+  - package_count
+  - shipment_value_inr
+  - origin_latitude
+  - origin_longitude
+  - destination_latitude
+  - destination_longitude
+  - distance_km
+  - carrier_historical_delay_rate
+  - route_historical_delay_rate
+  - warehouse_historical_delay_rate
+  - destination_historical_delay_rate
+  - promised_delivery_days
+  - month
+  - quarter
+  - is_weekend
+  - is_holiday
+  # Realized warehouse and operational durations
+  - warehouse_processing_hours
+  - loading_time_hours
+  - handling_time_hours
+  - customs_clearance_hours
+  # Finalized route parameters
+  - number_of_stops
+  - route_complexity_score
+  # Real-time departure telematics
+  - congestion_index
+  - weather_risk_score
+
+# Raw categorical features available at dispatch
+raw_categorical_features:
+  # Base booking categorical features
+  - day_of_week
+  - holiday_name
+  - product_category
+  - priority_level
+  - origin_city
+  - origin_state
+  - destination_city
+  - destination_state
+  - delivery_zone
+  - fulfillment_center
+  - transport_mode
+  - carrier
+  - vehicle_type
+  - route_type
+  - warehouse_type
+  - service_level
+  - customer_type
+  # Real-time departure environmental conditions
+  - traffic_level
+  - weather_condition
+  - road_condition
+
+# Engineered features generated specifically for Point B
+engineered_features:
+  # Inherited from Point A
+  - log_distance_km
+  - log_package_weight
+  - log_shipment_value
+  - package_density_kg_m3
+  - value_per_kg
+  - is_same_state
+  - estimated_dispatch_lead_hours
+  - order_hour
+  - order_day
+  # Realized operational duration features
+  - order_to_pickup_hours
+  - pickup_to_dispatch_hours
+  - dispatch_delay_hours
+  # Realized transit interactions
+  - traffic_weather_interaction
+  - stops_per_100km
+  - complexity_per_stop
+  # Telematics missingness indicators
+  - traffic_missing
+  - weather_missing
+  - road_condition_missing
+
+# Transformation and Imputation strategies
+preprocessing:
+  numerical_imputer_strategy: median
+  categorical_imputer_strategy: constant
+  categorical_fill_value: Unknown
+  holiday_fill_value: No_Holiday
+  one_hot_encoding:
+    handle_unknown: ignore
+    sparse_output: false
+  scale_numerical: false

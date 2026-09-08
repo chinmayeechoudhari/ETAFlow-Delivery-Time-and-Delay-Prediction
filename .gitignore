@@ -1,2 +1,119 @@
+# ==============================================================================
+# ETAFlow - Comprehensive Git Ignore Configuration
+# ==============================================================================
+
+# --- Python & Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# --- Virtual Environments ---
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+bin/
+include/
+lib/
+
+# --- Testing, Coverage & Linters ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.tox/
+.nox/
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Large Datasets & ML Artifacts (Managed via DVC) ---
+# Raw and heavy processed datasets exceed Git/GitHub 100MB thresholds
+data/raw/*.csv
+data/raw/*.parquet
+data/raw/*.zip
+data/raw/*.tar.gz
+data/raw/*.gz
+
+data/processed/*.csv
+data/processed/*.parquet
+data/processed/*.joblib
+data/processed/*.pkl
+data/processed/*.npy
+
+# Serialized Model Weights & Checkpoints
+models/*.joblib
+models/*.pkl
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.bin
+models/*.h5
+
+# --- Whitelist Critical Metadata & Configurations ---
+!data/reference/*.csv
+!data/reference/*.json
+!data/processed/feature_manifest.json
+!data/**/*.dvc
+!data/**/.gitkeep
+!models/**/.gitkeep
+
+# --- MLOps, Tracking & Caches ---
+mlruns/
+mlartifacts/
+.dvc/cache
+.dvc/tmp
+
+# --- Monitoring & Dashboards Local State ---
+monitoring/prometheus/data/
+monitoring/grafana/data/
+
+# --- Environment Variables & Secrets ---
+.env
+.env.*
+.env.local
+!.env.example
+
+# --- IDEs & Editor Configuration ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Operating System Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Internal Tool & AST Knowledge Graph Outputs ---
 graphify-out/
-/shipments.csv

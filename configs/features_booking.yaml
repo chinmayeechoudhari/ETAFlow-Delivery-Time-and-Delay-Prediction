@@ -1,0 +1,115 @@
+# ==============================================================================
+# ETAFlow Feature Configuration: Prediction Point A (Booking / Order Placement)
+# ==============================================================================
+# This configuration defines features available at initial order placement /
+# customer checkout before physical fulfillment begins.
+# Strictly excludes all downstream operational milestones, realized durations,
+# route stops, telematics at dispatch, and delivery outcomes.
+# ==============================================================================
+
+prediction_horizon: booking
+description: "Features known at order booking time before warehouse staging or dispatch."
+version: "1.0.0"
+source_dataset_version: "v1"
+
+# Unique consignment identifier (metadata index, never used as an ML predictor)
+id_column: shipment_id
+
+# Target columns (strictly isolated into targets artifact, never in feature matrix)
+target_columns:
+  regression_target: actual_delivery_days
+  classification_target: is_delayed
+  secondary_target: delivery_delay_days
+
+# Explicitly excluded columns (leakage protection)
+excluded_columns:
+  # Post-delivery targets & milestones
+  - delivery_datetime
+  - actual_delivery_days
+  - delivery_delay_days
+  - is_delayed
+  # Point B downstream timestamps
+  - pickup_datetime
+  - actual_dispatch_datetime
+  # Point B realized hub operations
+  - warehouse_processing_hours
+  - loading_time_hours
+  - handling_time_hours
+  - customs_clearance_hours
+  # Point B route & telematics features
+  - number_of_stops
+  - route_complexity_score
+  - traffic_level
+  - congestion_index
+  - weather_condition
+  - weather_risk_score
+  - road_condition
+
+# Raw timestamp columns available at booking
+timestamp_columns:
+  - order_date
+  - estimated_dispatch_datetime
+
+# Raw numerical features available at booking
+raw_numerical_features:
+  - package_weight_kg
+  - package_volume_cm3
+  - package_count
+  - shipment_value_inr
+  - origin_latitude
+  - origin_longitude
+  - destination_latitude
+  - destination_longitude
+  - distance_km
+  - carrier_historical_delay_rate
+  - route_historical_delay_rate
+  - warehouse_historical_delay_rate
+  - destination_historical_delay_rate
+  - promised_delivery_days
+  - month
+  - quarter
+  - is_weekend
+  - is_holiday
+
+# Raw categorical features available at booking
+raw_categorical_features:
+  - day_of_week
+  - holiday_name
+  - product_category
+  - priority_level
+  - origin_city
+  - origin_state
+  - destination_city
+  - destination_state
+  - delivery_zone
+  - fulfillment_center
+  - transport_mode
+  - carrier
+  - vehicle_type
+  - route_type
+  - warehouse_type
+  - service_level
+  - customer_type
+
+# Engineered features generated specifically for Point A
+engineered_features:
+  - log_distance_km
+  - log_package_weight
+  - log_shipment_value
+  - package_density_kg_m3
+  - value_per_kg
+  - is_same_state
+  - estimated_dispatch_lead_hours
+  - order_hour
+  - order_day
+
+# Transformation and Imputation strategies
+preprocessing:
+  numerical_imputer_strategy: median
+  categorical_imputer_strategy: constant
+  categorical_fill_value: Unknown
+  holiday_fill_value: No_Holiday
+  one_hot_encoding:
+    handle_unknown: ignore
+    sparse_output: false
+  scale_numerical: false
