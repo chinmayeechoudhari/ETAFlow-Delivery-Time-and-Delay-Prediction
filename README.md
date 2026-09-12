@@ -23,6 +23,7 @@ Built around **Two-Horizon Operational Decision Points** (Order Booking vs. Vehi
 - [Project Directory Structure](#-project-directory-structure)
 - [Dataset & ML-Readiness Highlights](#-dataset--ml-readiness-highlights)
 - [Preprocessing & Feature Engineering Layer](#-preprocessing--feature-engineering-layer)
+- [Milestone 6-A: Baseline ML & Benchmarking](#-milestone-6-a--baseline-ml-development--benchmarking)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -161,6 +162,63 @@ The preprocessing subsystem (`ml/preprocessing/`) standardizes transformations i
 
 ---
 
+## 🔬 Milestone 6-A — Baseline ML Development & Benchmarking
+
+Milestone 6-A establishes an empirical baseline for delivery-time regression (`actual_delivery_days`) and binary delay risk classification (`is_delayed`) across both operational horizons.
+
+### 1. Model Families Benchmarked
+- **Level 0 (Heuristic)**: `DummyRegressor` (mean), `DummyClassifier` (prior)
+- **Level 1 (Linear)**: `Ridge Regression`, `Logistic Regression` (StandardScaler conditioned)
+- **Level 2 (Bagging)**: `RandomForestRegressor`, `RandomForestClassifier`
+- **Level 3 (Boosting)**: `LightGBM Regressor / Classifier`, `XGBoost Regressor / Classifier`
+
+### 2. Leakage-Safe Chronological Split
+Records are strictly partitioned chronologically by `order_date` without temporal lookahead:
+- **Train (70%)**: 70,000 shipments (`2023-01-01` to `2025-02-05`)
+- **Validation (15%)**: 15,000 shipments (`2025-02-05` to `2025-07-18`)
+- **Test (15%)**: 15,000 shipments (`2025-07-18` to `2025-12-30`)
+- **Leakage Prevention**: All preprocessing transformers are fitted **strictly on the Train partition** before transforming Validation and Test sets.
+
+### 3. Empirical Benchmark Results (Test Set)
+
+#### Delivery-Time Regression (`actual_delivery_days` in days):
+| Horizon | Model | MAE | RMSE | R² | Within ±1 Day | Train Time |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Booking** | **LightGBM** | **0.517** | **0.806** | **0.738** | **87.6%** | 0.46s |
+| Booking | XGBoost | 0.519 | 0.810 | 0.736 | 87.7% | 0.65s |
+| Booking | Random Forest | 0.545 | 0.847 | 0.711 | 86.3% | 10.45s |
+| Booking | Ridge | 0.605 | 0.913 | 0.664 | 86.0% | 0.44s |
+| Booking | Dummy | 1.176 | 1.582 | -0.010 | 49.5% | <0.01s |
+| **Dispatch** | **LightGBM** | **0.153** | **0.278** | **0.969** | **98.7%** | 0.55s |
+| Dispatch | XGBoost | 0.157 | 0.285 | 0.967 | 98.6% | 0.69s |
+| Dispatch | Random Forest | 0.222 | 0.365 | 0.946 | 97.7% | 13.37s |
+| Dispatch | Ridge | 0.345 | 0.563 | 0.872 | 93.7% | 0.45s |
+| Dispatch | Dummy | 1.176 | 1.582 | -0.010 | 49.5% | <0.01s |
+
+#### Delay Risk Classification (`is_delayed` binary):
+| Horizon | Model | F1 Score | PR-AUC | ROC-AUC | Precision | Recall | Train Time |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Booking** | **XGBoost** | **0.8245** | **0.9274** | **0.9632** | 0.8737 | 0.7806 | 0.60s |
+| Booking | LightGBM | 0.8235 | 0.9278 | 0.9635 | 0.8657 | 0.7852 | 0.48s |
+| Booking | Logistic Regression | 0.8177 | 0.9167 | 0.9557 | 0.8519 | 0.7861 | 2.88s |
+| Booking | Random Forest | 0.7643 | 0.9130 | 0.9532 | 0.9256 | 0.6508 | 0.96s |
+| Booking | Dummy | 0.0000 | 0.2917 | 0.5000 | 0.0000 | 0.0000 | <0.01s |
+| **Dispatch** | **LightGBM** | **0.9476** | **0.9888** | **0.9939** | 0.9623 | 0.9333 | 0.59s |
+| Dispatch | XGBoost | 0.9466 | 0.9879 | 0.9937 | 0.9640 | 0.9298 | 0.72s |
+| Dispatch | Logistic Regression | 0.9375 | 0.9827 | 0.9913 | 0.9458 | 0.9294 | 2.67s |
+| Dispatch | Random Forest | 0.8738 | 0.9712 | 0.9857 | 0.9702 | 0.7948 | 1.21s |
+| Dispatch | Dummy | 0.0000 | 0.2917 | 0.5000 | 0.0000 | 0.0000 | <0.01s |
+
+### 4. Booking vs. Dispatch Comparative Takeaways
+1. **Error Reduction**: Dispatch information achieves a **70.37% relative reduction in ETA MAE** (dropping from 0.517 to 0.153 days).
+2. **Within-Day Reliability**: Consignments arriving within ±1 day of predicted ETA increases from **87.6% to 98.7%**.
+3. **Delay Discrimination**: F1 score jumps by **+14.92%** (from 0.8245 to 0.9476) and PR-AUC reaches **0.9888**.
+4. **Key Influencers**: Dispatch-stage telematics (congestion index, weather risk score, loading durations) provide the critical delta separating high-risk shipments from on-time consignments.
+
+Full benchmark report and feature importance rankings: [`reports/model_benchmark/model_benchmark_report.md`](reports/model_benchmark/model_benchmark_report.md).
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -226,6 +284,27 @@ Outputs produced in `data/processed/`:
 - `dispatch_features.parquet` & `dispatch_pipeline.joblib` (Point B)
 - `targets.parquet` (Coupled regression & classification ground truths)
 - `feature_manifest.json` (Full cryptographic & schema lineage manifest)
+
+### Running Baseline Model Benchmarking
+
+Execute the full baseline model suite (Dummy, Ridge/LogisticRegression, Random Forest, LightGBM, XGBoost) with chronological splitting:
+```bash
+# Benchmark all prediction horizons (Booking & Dispatch)
+python scripts/train_baseline.py --all
+
+# Or benchmark an individual horizon
+python scripts/train_baseline.py --horizon booking
+python scripts/train_baseline.py --horizon dispatch
+```
+
+Outputs produced in `models/baseline/` and `reports/model_benchmark/`:
+- `models/baseline/{booking,dispatch}/regression/*.joblib`
+- `models/baseline/{booking,dispatch}/classification/*.joblib`
+- `models/baseline/{booking,dispatch}/feature_pipeline.joblib`
+- `reports/model_benchmark/regression_results.csv`
+- `reports/model_benchmark/classification_results.csv`
+- `reports/model_benchmark/benchmark_summary.json`
+- `reports/model_benchmark/model_benchmark_report.md`
 
 ### Running Unit & Integration Tests
 

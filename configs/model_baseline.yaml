@@ -1,0 +1,99 @@
+# ==============================================================================
+# ETAFlow Baseline Model Configuration (Milestone 6-A)
+# ==============================================================================
+# Declarative configuration for baseline model training, evaluation, and benchmarking.
+# Focuses on benchmarking model families across Booking and Dispatch horizons
+# without hyperparameter tuning (reserved for Milestone 6-B).
+# ==============================================================================
+
+version: "1.0.0"
+milestone: "M6-A"
+description: "Baseline ML Development and Benchmarking Suite"
+
+# Global reproducibility
+random_seed: 42
+
+# Chronological split parameters
+split:
+  timestamp_column: "order_date"
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+
+# Operational prediction horizons to evaluate
+horizons:
+  - "booking"
+  - "dispatch"
+
+# Target definitions
+targets:
+  id_column: "shipment_id"
+  regression_target: "actual_delivery_days"
+  classification_target: "is_delayed"
+  secondary_target: "delivery_delay_days"
+  promised_column: "promised_delivery_days"
+
+# Paths
+paths:
+  raw_data: "data/raw/shipments.csv"
+  config_dir: "configs"
+  model_dir: "models/baseline"
+  report_dir: "reports/model_benchmark"
+
+# Baseline Model Families & Hyperparameters
+models:
+  regression:
+    dummy:
+      strategy: "mean"
+    ridge:
+      alpha: 1.0
+      scale_features: true
+    random_forest:
+      n_estimators: 100
+      max_depth: 12
+      random_state: 42
+      n_jobs: -1
+    lightgbm:
+      n_estimators: 100
+      learning_rate: 0.1
+      random_state: 42
+      n_jobs: -1
+      verbose: -1
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+      n_jobs: -1
+
+  classification:
+    dummy:
+      strategy: "prior"
+    logistic_regression:
+      max_iter: 500
+      random_state: 42
+      scale_features: true
+    random_forest:
+      n_estimators: 100
+      max_depth: 12
+      random_state: 42
+      n_jobs: -1
+    lightgbm:
+      n_estimators: 100
+      learning_rate: 0.1
+      random_state: 42
+      n_jobs: -1
+      verbose: -1
+    xgboost:
+      n_estimators: 100
+      max_depth: 6
+      learning_rate: 0.1
+      random_state: 42
+      n_jobs: -1
+      eval_metric: "logloss"
+
+# Evaluation settings
+evaluation:
+  regression_tolerances_days: [0.5, 1.0, 2.0]
+  primary_regression_metric: "mae"
+  primary_classification_metric: "f1"

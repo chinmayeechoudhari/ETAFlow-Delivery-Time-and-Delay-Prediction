@@ -1,0 +1,162 @@
+{
+  "benchmark_metadata": {
+    "milestone": "M6-A",
+    "generated_at_utc": "2026-09-12T08:26:52.991667+00:00",
+    "random_seed": 42,
+    "horizons": [
+      "booking",
+      "dispatch"
+    ]
+  },
+  "dataset_info": {
+    "total_records": 100000,
+    "raw_path": "data\\raw\\shipments.csv"
+  },
+  "split_info": {
+    "timestamp_column": "order_date",
+    "total_rows": 100000,
+    "boundaries_valid": {
+      "train_before_val": true,
+      "val_before_test": true
+    },
+    "train": {
+      "row_count": 70000,
+      "percentage": 70.0,
+      "start_date": "2023-01-01 00:01:22",
+      "end_date": "2025-02-05 14:20:04",
+      "delay_rate": 0.2595857142857143,
+      "mean_delivery_days": 2.4766817142857143
+    },
+    "validation": {
+      "row_count": 15000,
+      "percentage": 15.0,
+      "start_date": "2025-02-05 14:36:48",
+      "end_date": "2025-07-18 13:47:30",
+      "delay_rate": 0.248,
+      "mean_delivery_days": 2.4061299999999997
+    },
+    "test": {
+      "row_count": 15000,
+      "percentage": 15.0,
+      "start_date": "2025-07-18 14:38:43",
+      "end_date": "2025-12-30 23:50:07",
+      "delay_rate": 0.29173333333333334,
+      "mean_delivery_days": 2.6322506666666667
+    }
+  },
+  "best_models": {
+    "regression": {
+      "booking": {
+        "model": "lightgbm",
+        "test_metrics": {
+          "mae": 0.5172200729817696,
+          "rmse": 0.806414504235653,
+          "r2": 0.7376668733556001,
+          "within_0.5_day": 0.6457333333333334,
+          "within_1_day": 0.8755333333333334,
+          "within_2.0_day": 0.9724666666666667,
+          "error_statistics": {
+            "median_abs_error": 0.3408002292710123,
+            "max_abs_error": 9.477548031751589,
+            "p95_abs_error": 1.5416522956091903,
+            "residual_mean": -0.00851343708431907,
+            "residual_std": 0.8063695641767771
+          },
+          "sample_count": 15000
+        },
+        "artifact_path": "models\\baseline\\booking\\regression\\booking_lightgbm_regressor.joblib"
+      },
+      "dispatch": {
+        "model": "lightgbm",
+        "test_metrics": {
+          "mae": 0.15323001443743076,
+          "rmse": 0.277611146932208,
+          "r2": 0.9689107478411486,
+          "within_0.5_day": 0.9481333333333334,
+          "within_1_day": 0.9872666666666666,
+          "within_2.0_day": 0.9975333333333334,
+          "error_statistics": {
+            "median_abs_error": 0.09150550548137115,
+            "max_abs_error": 4.821369871640244,
+            "p95_abs_error": 0.5096852577709117,
+            "residual_mean": -0.00892064699554521,
+            "residual_std": 0.2774677836401856
+          },
+          "sample_count": 15000
+        },
+        "artifact_path": "models\\baseline\\dispatch\\regression\\dispatch_lightgbm_regressor.joblib"
+      }
+    },
+    "classification": {
+      "booking": {
+        "model": "xgboost",
+        "test_metrics": {
+          "accuracy": 0.9030666666666667,
+          "precision": 0.8736572890025576,
+          "recall": 0.7806215722120659,
+          "f1": 0.8245232923002656,
+          "roc_auc": 0.9632057423019317,
+          "pr_auc": 0.9274277870191304,
+          "confusion_matrix": {
+            "tn": 10130,
+            "fp": 494,
+            "fn": 960,
+            "tp": 3416,
+            "matrix": [
+              [
+                10130,
+                494
+              ],
+              [
+                960,
+                3416
+              ]
+            ]
+          },
+          "sample_count": 15000
+        },
+        "artifact_path": "models\\baseline\\booking\\classification\\booking_xgboost_classifier.joblib"
+      },
+      "dispatch": {
+        "model": "lightgbm",
+        "test_metrics": {
+          "accuracy": 0.9698666666666667,
+          "precision": 0.9622997172478793,
+          "recall": 0.93327239488117,
+          "f1": 0.9475638051044084,
+          "roc_auc": 0.9939475753218541,
+          "pr_auc": 0.9887647792603395,
+          "confusion_matrix": {
+            "tn": 10464,
+            "fp": 160,
+            "fn": 292,
+            "tp": 4084,
+            "matrix": [
+              [
+                10464,
+                160
+              ],
+              [
+                292,
+                4084
+              ]
+            ]
+          },
+          "sample_count": 15000
+        },
+        "artifact_path": "models\\baseline\\dispatch\\classification\\dispatch_lightgbm_classifier.joblib"
+      }
+    }
+  },
+  "feature_importances": {
+    "booking": "reports\\model_benchmark\\booking_feature_importance.csv",
+    "dispatch": "reports\\model_benchmark\\dispatch_feature_importance.csv"
+  },
+  "comparison_narrative": "1. **Delivery-Time Estimation**: Dispatch horizon features achieve an absolute MAE reduction of **0.364 days** (+70.37% relative error reduction, moving from 0.517 days at Booking to 0.153 days at Dispatch).\n2. **Delay Risk Discrimination**: Incorporating realized warehouse processing, loading durations, and transit telematics increases the classification F1 score by **+0.1230** (+14.92% relative improvement, from 0.8245 to 0.9476).\n3. **Conclusion**: Physical departure data provides substantial incremental signal over preorder booking static data, confirming the dual-horizon architectural premise.",
+  "report_artifacts": {
+    "regression_results_csv": "reports\\model_benchmark\\regression_results.csv",
+    "classification_results_csv": "reports\\model_benchmark\\classification_results.csv",
+    "summary_json": "reports\\model_benchmark\\benchmark_summary.json",
+    "report_markdown": "reports\\model_benchmark\\model_benchmark_report.md"
+  }
+}

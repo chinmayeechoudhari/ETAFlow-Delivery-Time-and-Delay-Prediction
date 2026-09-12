@@ -72,12 +72,19 @@ data/processed/*.npy
 
 # Serialized Model Weights & Checkpoints
 models/*.joblib
+models/**/*.joblib
 models/*.pkl
+models/**/*.pkl
 models/*.pt
+models/**/*.pt
 models/*.pth
+models/**/*.pth
 models/*.onnx
+models/**/*.onnx
 models/*.bin
+models/**/*.bin
 models/*.h5
+models/**/*.h5
 
 # --- Whitelist Critical Metadata & Configurations ---
 !data/reference/*.csv
