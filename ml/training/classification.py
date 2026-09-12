@@ -159,3 +159,24 @@ def predict_classification(
             logger.warning("predict_proba failed for model: %s", e)
 
     return y_pred, y_prob
+
+
+def predict_classification_proba(model: Any, X: pd.DataFrame) -> np.ndarray:
+    """Generate positive-class delay probabilities.
+
+    Args:
+        model: Fitted estimator or Pipeline.
+        X: Input feature matrix.
+
+    Returns:
+        np.ndarray: 1D array of positive class probabilities.
+    """
+    if hasattr(model, "predict_proba"):
+        probs = model.predict_proba(X)
+        if probs.ndim == 2 and probs.shape[1] >= 2:
+            return np.asarray(probs[:, 1], dtype=np.float64)
+        elif probs.ndim == 2 and probs.shape[1] == 1:
+            return np.asarray(probs[:, 0], dtype=np.float64)
+        return np.asarray(probs, dtype=np.float64)
+    # Fallback to discrete predictions if model lacks predict_proba
+    return np.asarray(model.predict(X), dtype=np.float64)

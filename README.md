@@ -219,6 +219,73 @@ Full benchmark report and feature importance rankings: [`reports/model_benchmark
 
 ---
 
+## 🔬 Milestone 6-B: Advanced ML Optimization, Robustness & Explainability
+
+Milestone 6-B performs advanced optimization and multi-dimensional evaluation to select robust, reliable, and explainable final candidate models prior to enterprise MLOps platform integration.
+
+### 1. Optimization Architecture & Workflow
+
+```text
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                     ETAFlow M6-B ADVANCED OPTIMIZATION SUITE                    │
+├───────────────────────┬─────────────────────────┬───────────────────────────────┤
+│ 1. VALIDATION         │ 2. TUNING & CALIBRATION │ 3. ROBUSTNESS & EXPLAINABILITY│
+│ • Zero-Leakage Audit  │ • Bayesian Optuna (TPE) │ • Sliced Subgroup Breakdown   │
+│ • 3-Fold Time-Aware   │ • Threshold Tuning (F1) │ • MCAR Missingness Stress     │
+│   Expanding Window CV │ • Isotonic & Sigmoid    │ • Environmental Shock Tests   │
+│ • Quarantined Test    │   Probability Calibr.   │ • 5-Seed Stability Audit      │
+│   (15k samples held)  │ • Loss & Brier Score    │ • Exact TreeExplainer SHAP    │
+└───────────────────────┴─────────────────────────┴───────────────────────────────┘
+```
+
+### 2. Final Selected Champions (Test Set: 15,000 future records)
+
+| Operational Horizon | Prediction Task | Final Selected Champion Model | Baseline M6-A | Optimized M6-B | Improvement |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Booking (Point A)** | Continuous ETA (days) | **LightGBM Regressor (Optimized)** | 0.5170 MAE | **0.5164 MAE** | R² 0.7396, 87.5% within ±1d |
+| **Booking (Point A)** | Delay Classification | **XGBoost Classifier (Tuned Thresh 0.42)** | 0.8245 F1 | **0.8306 F1** | Prec: 0.832, Rec: 0.829, ROC-AUC: 0.963 |
+| **Dispatch (Point B)** | Post-Departure ETA | **LightGBM Regressor (Optimized)** | 0.1532 MAE | **0.1370 MAE** | **10.6% error drop**, R² 0.9727 |
+| **Dispatch (Point B)** | Post-Departure Delay | **LightGBM Classifier (Tuned Thresh 0.48)** | 0.9476 F1 | **0.9525 F1** | Prec: 0.963, Rec: 0.942, ROC-AUC: 0.995 |
+
+### 3. Key Findings Across Evaluation Phases
+
+1. **Dispatch Sanity & Leakage Review**: Systematic feature ablation proved that Point B accuracy is 100% genuine and driven by live departure telematics (`congestion_index`, `weather_risk_score`, `road_condition`). Ablating departure telematics immediately degraded Dispatch MAE to **0.478 days** (converging to Booking level).
+2. **Time-Aware Cross-Validation**: 3 expanding folds on 70,000 training records confirmed low variance across chronological periods (Booking MAE: 0.4428±0.14d, Dispatch MAE: 0.1456±0.02d).
+3. **Optuna Bayesian Tuning**: 20 TPE trials per model successfully tuned regularization, tree depth, and child sample constraints, preventing overfitting on rare route combinations.
+4. **Classification Threshold Optimization**: Shifting from default 0.50 to optimal thresholds (0.42 for Booking, 0.48 for Dispatch) increased Booking F1 to **0.8306** and Dispatch F1 to **0.9525**.
+5. **Probability Calibration**: Isotonic calibration reduced Brier Score loss from 0.0559 to **0.0552** on Booking, and from 0.0215 to **0.0201** on Dispatch, producing risk-reflective probabilities.
+6. **Subgroup Error Analysis**: Surfaced highest absolute variance on ultra-long distance shipments (>3000km, MAE 0.667d) and during severe weather (MAE 2.23d). Bias remained tightly bounded within ±0.05 days.
+7. **Robustness & Stress Testing**: Models degraded gracefully under 5%, 10%, and 20% missingness without crashing due to mode/median imputer shielding. Environmental shocks realistically increased predicted transit duration.
+8. **Multi-Seed Stability**: Evaluated across 5 random seeds `[42, 123, 2024, 3407, 999]`. Standard deviation across seeds was **<0.0007**, confirming exceptional stability.
+9. **TreeExplainer SHAP Explainability**: Computed exact Shapley values identifying `distance_km`, `transport_mode_Air`, `number_of_stops`, and `congestion_index` as top drivers. Generated dynamic human-readable shipment explanations.
+
+### 4. Running M6-B Optimization & Evaluation
+
+```bash
+# Run the dispatch leakage and sanity audit
+python scripts/audit_dispatch_leakage.py
+
+# Run the complete end-to-end M6-B optimization pipeline
+python scripts/run_optimization.py --all
+
+# Run all automated tests (31/31 unit tests)
+pytest tests/unit/ -v
+```
+
+Artifacts and comprehensive markdown reports:
+- [Dispatch Sanity & Leakage Audit](reports/model_optimization/dispatch_leakage_audit_report.md)
+- [Time-Aware Cross-Validation Report](reports/cross_validation/time_aware_cv_report.md)
+- [Hyperparameter Optimization Report](reports/model_optimization/hyperparameter_optimization_report.md)
+- [Threshold Optimization Report](reports/model_optimization/threshold_optimization_report.md)
+- [Probability Calibration Report](reports/calibration/probability_calibration_report.md)
+- [Sliced Subgroup Error Analysis](reports/error_analysis/subgroup_error_analysis_report.md)
+- [Robustness & Stress Testing Report](reports/robustness/robustness_stress_testing_report.md)
+- [Multi-Seed Model Stability Report](reports/model_optimization/model_stability_report.md)
+- [SHAP Model Explainability Report](reports/explainability/shap_explainability_report.md)
+- [Final Model Selection Report](reports/model_selection/final_candidate_model_selection_report.md)
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites

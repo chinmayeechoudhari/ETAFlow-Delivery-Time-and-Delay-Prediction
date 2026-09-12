@@ -1,0 +1,133 @@
+# ==============================================================================
+# ETAFlow Advanced ML Optimization & Evaluation Configuration (Milestone 6-B)
+# ==============================================================================
+# Declarative configuration for time-aware cross validation, Optuna hyperparameter
+# tuning, threshold optimization, probability calibration, subgroup error analysis,
+# robustness stress testing, multi-seed stability, and SHAP explainability.
+# ==============================================================================
+
+version: "1.0.0"
+milestone: "M6-B"
+description: "Advanced ML Optimization, Robustness, and Explainability Suite"
+
+# Global default reproducibility
+random_seed: 42
+
+# Chronological split parameters (Test set is quarantined and touched ONLY for final model evaluation)
+split:
+  timestamp_column: "order_date"
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+
+# Operational prediction horizons
+horizons:
+  - "booking"
+  - "dispatch"
+
+# Target definitions
+targets:
+  id_column: "shipment_id"
+  regression_target: "actual_delivery_days"
+  classification_target: "is_delayed"
+  secondary_target: "delivery_delay_days"
+  promised_column: "promised_delivery_days"
+
+# Time-Aware Expanding Window Cross Validation (applied to Train split: 70k)
+cross_validation:
+  strategy: "expanding_window"
+  n_splits: 3
+  min_train_size: 35000
+
+# Hyperparameter Optimization (Optuna)
+hyperopt:
+  n_trials: 20
+  timeout_seconds: 600
+  random_seed: 42
+  candidates:
+    lightgbm:
+      learning_rate: [0.01, 0.20]
+      n_estimators: [100, 350]
+      num_leaves: [15, 127]
+      max_depth: [3, 10]
+      min_child_samples: [10, 100]
+      subsample: [0.6, 1.0]
+      colsample_bytree: [0.6, 1.0]
+      reg_alpha: [0.001, 10.0]
+      reg_lambda: [0.001, 10.0]
+    xgboost:
+      learning_rate: [0.01, 0.20]
+      n_estimators: [100, 350]
+      max_depth: [3, 9]
+      min_child_weight: [1, 10]
+      subsample: [0.6, 1.0]
+      colsample_bytree: [0.6, 1.0]
+      gamma: [0.0, 5.0]
+      reg_alpha: [0.001, 10.0]
+      reg_lambda: [0.001, 10.0]
+
+# Classification Decision Threshold Optimization
+threshold_tuning:
+  range: [0.20, 0.80]
+  step: 0.02
+  metric: "f1"
+
+# Probability Calibration (Sigmoid / Platt and Isotonic)
+calibration:
+  methods:
+    - "sigmoid"
+    - "isotonic"
+
+# Subgroup / Sliced Error Analysis
+subgroup_analysis:
+  categorical_features:
+    - "transport_mode"
+    - "carrier"
+    - "origin_hub"
+    - "destination_hub"
+    - "weather_condition"
+    - "traffic_level"
+    - "road_condition"
+    - "is_holiday"
+  continuous_bins:
+    distance_km:
+      bins: [0, 500, 1500, 3000, 10000]
+      labels: ["Short (<500km)", "Medium (500-1500km)", "Long (1500-3000km)", "Ultra-Long (>3000km)"]
+    package_weight_kg:
+      bins: [0, 5, 20, 50, 500]
+      labels: ["Small (<5kg)", "Medium (5-20kg)", "Heavy (20-50kg)", "Freight (>50kg)"]
+
+# Robustness & Stress Testing
+robustness:
+  missingness_rates: [0.05, 0.10, 0.20]
+  environmental_shocks:
+    high_traffic:
+      traffic_level: "High"
+      congestion_index: 0.85
+    severe_weather:
+      weather_condition: "Severe"
+      weather_risk_score: 0.85
+    poor_road:
+      road_condition: "Poor"
+
+# Model Stability Across Seeds
+stability:
+  seeds: [42, 123, 2024, 3407, 999]
+
+# Explainability (SHAP)
+explainability:
+  sample_size_local: 5
+  background_samples: 200
+
+# File Paths
+paths:
+  raw_data: "data/raw/shipments.csv"
+  model_dir: "models/optimized"
+  reports:
+    cross_validation: "reports/cross_validation"
+    model_optimization: "reports/model_optimization"
+    calibration: "reports/calibration"
+    error_analysis: "reports/error_analysis"
+    robustness: "reports/robustness"
+    explainability: "reports/explainability"
+    model_selection: "reports/model_selection"

@@ -1,0 +1,1283 @@
+{
+  "booking_regression": {
+    "global": {
+      "target_type": "regression",
+      "total_features": 222,
+      "top_features": [
+        {
+          "rank": 1,
+          "feature": "distance_km",
+          "mean_abs_shap": 0.38761
+        },
+        {
+          "rank": 2,
+          "feature": "transport_mode_Air",
+          "mean_abs_shap": 0.36122
+        },
+        {
+          "rank": 3,
+          "feature": "month",
+          "mean_abs_shap": 0.21083
+        },
+        {
+          "rank": 4,
+          "feature": "log_distance_km",
+          "mean_abs_shap": 0.19375
+        },
+        {
+          "rank": 5,
+          "feature": "route_historical_delay_rate",
+          "mean_abs_shap": 0.12631
+        },
+        {
+          "rank": 6,
+          "feature": "transport_mode_Rail",
+          "mean_abs_shap": 0.08032
+        },
+        {
+          "rank": 7,
+          "feature": "route_type_Urban_Last_Mile",
+          "mean_abs_shap": 0.06835
+        },
+        {
+          "rank": 8,
+          "feature": "vehicle_type_Commercial_Belly_Cargo",
+          "mean_abs_shap": 0.05731
+        },
+        {
+          "rank": 9,
+          "feature": "transport_mode_Road",
+          "mean_abs_shap": 0.05133
+        },
+        {
+          "rank": 10,
+          "feature": "transport_mode_Sea",
+          "mean_abs_shap": 0.03866
+        },
+        {
+          "rank": 11,
+          "feature": "carrier_BlueDart",
+          "mean_abs_shap": 0.03626
+        },
+        {
+          "rank": 12,
+          "feature": "warehouse_historical_delay_rate",
+          "mean_abs_shap": 0.03582
+        },
+        {
+          "rank": 13,
+          "feature": "carrier_historical_delay_rate",
+          "mean_abs_shap": 0.03226
+        },
+        {
+          "rank": 14,
+          "feature": "origin_city_Mumbai",
+          "mean_abs_shap": 0.02723
+        },
+        {
+          "rank": 15,
+          "feature": "quarter",
+          "mean_abs_shap": 0.02709
+        },
+        {
+          "rank": 16,
+          "feature": "origin_city_Delhi",
+          "mean_abs_shap": 0.0259
+        },
+        {
+          "rank": 17,
+          "feature": "origin_city_Bengaluru",
+          "mean_abs_shap": 0.02286
+        },
+        {
+          "rank": 18,
+          "feature": "is_holiday",
+          "mean_abs_shap": 0.01919
+        },
+        {
+          "rank": 19,
+          "feature": "vehicle_type_Dedicated_Cargo_Aircraft_B737_B757",
+          "mean_abs_shap": 0.01596
+        },
+        {
+          "rank": 20,
+          "feature": "vehicle_type_Dedicated_Freight_Container_CONCOR",
+          "mean_abs_shap": 0.01505
+        }
+      ],
+      "summary": {
+        "distance_km": 0.38761,
+        "transport_mode_Air": 0.36122,
+        "month": 0.21083,
+        "log_distance_km": 0.19375,
+        "route_historical_delay_rate": 0.12631,
+        "transport_mode_Rail": 0.08032,
+        "route_type_Urban_Last_Mile": 0.06835,
+        "vehicle_type_Commercial_Belly_Cargo": 0.05731,
+        "transport_mode_Road": 0.05133,
+        "transport_mode_Sea": 0.03866,
+        "carrier_BlueDart": 0.03626,
+        "warehouse_historical_delay_rate": 0.03582,
+        "carrier_historical_delay_rate": 0.03226,
+        "origin_city_Mumbai": 0.02723,
+        "quarter": 0.02709,
+        "origin_city_Delhi": 0.0259,
+        "origin_city_Bengaluru": 0.02286,
+        "is_holiday": 0.01919,
+        "vehicle_type_Dedicated_Cargo_Aircraft_B737_B757": 0.01596,
+        "vehicle_type_Dedicated_Freight_Container_CONCOR": 0.01505
+      }
+    },
+    "local": [
+      {
+        "shipment_id": "SHP00079204",
+        "target_type": "regression",
+        "baseline_value": 2.4764,
+        "predicted_value": 1.2776,
+        "positive_drivers": [
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.1286,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "vehicle_type_Commercial_Belly_Cargo",
+            "feature_value": 0.0,
+            "shap_value": 0.0193,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_BlueDart",
+            "feature_value": 0.0,
+            "shap_value": 0.0191,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "vehicle_type_Multi_Axle_Container_Trailer",
+            "feature_value": 1.0,
+            "shap_value": 0.0166,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 690.7,
+            "shap_value": -0.4807,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 6.5392,
+            "shap_value": -0.2437,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "month",
+            "feature_value": 2.0,
+            "shap_value": -0.1483,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_historical_delay_rate",
+            "feature_value": 0.184,
+            "shap_value": -0.1352,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00079204\nPredicted ETA (days): 1.28 (Baseline: 2.48)\nETA increased because:\n  - transport_mode_Air = 0.0 (+0.13 days)\n  - vehicle_type_Commercial_Belly_Cargo = 0.0 (+0.02 days)\n  - carrier_BlueDart = 0.0 (+0.02 days)\n  - vehicle_type_Multi_Axle_Container_Trailer = 1.0 (+0.02 days)\nETA decreased because:\n  - distance_km = 690.7 (-0.48 days)\n  - log_distance_km = 6.5392 (-0.24 days)\n  - month = 2.0 (-0.15 days)\n  - route_historical_delay_rate = 0.184 (-0.14 days)"
+      },
+      {
+        "shipment_id": "SHP00055611",
+        "target_type": "regression",
+        "baseline_value": 2.4764,
+        "predicted_value": 4.3699,
+        "positive_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 2896.8,
+            "shap_value": 1.1667,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 7.9717,
+            "shap_value": 0.5613,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.3179,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "route_historical_delay_rate",
+            "feature_value": 0.41,
+            "shap_value": 0.2663,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "month",
+            "feature_value": 2.0,
+            "shap_value": -0.3647,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_type_Urban_Last_Mile",
+            "feature_value": 0.0,
+            "shap_value": -0.0606,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "quarter",
+            "feature_value": 1.0,
+            "shap_value": -0.0527,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 1.0,
+            "shap_value": -0.0517,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00055611\nPredicted ETA (days): 4.37 (Baseline: 2.48)\nETA increased because:\n  - distance_km = 2896.8 (+1.17 days)\n  - log_distance_km = 7.9717 (+0.56 days)\n  - transport_mode_Air = 0.0 (+0.32 days)\n  - route_historical_delay_rate = 0.41 (+0.27 days)\nETA decreased because:\n  - month = 2.0 (-0.36 days)\n  - route_type_Urban_Last_Mile = 0.0 (-0.06 days)\n  - quarter = 1.0 (-0.05 days)\n  - transport_mode_Road = 1.0 (-0.05 days)"
+      },
+      {
+        "shipment_id": "SHP00063122",
+        "target_type": "regression",
+        "baseline_value": 2.4764,
+        "predicted_value": 2.5453,
+        "positive_drivers": [
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.2167,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 1.0,
+            "shap_value": 0.2097,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "route_type_Urban_Last_Mile",
+            "feature_value": 1.0,
+            "shap_value": 0.1297,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 0.0,
+            "shap_value": 0.068,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "month",
+            "feature_value": 2.0,
+            "shap_value": -0.196,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_historical_delay_rate",
+            "feature_value": 0.273,
+            "shap_value": -0.0818,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_BlueDart",
+            "feature_value": 1.0,
+            "shap_value": -0.0804,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_historical_delay_rate",
+            "feature_value": 0.13,
+            "shap_value": -0.06,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00063122\nPredicted ETA (days): 2.55 (Baseline: 2.48)\nETA increased because:\n  - transport_mode_Air = 0.0 (+0.22 days)\n  - transport_mode_Rail = 1.0 (+0.21 days)\n  - route_type_Urban_Last_Mile = 1.0 (+0.13 days)\n  - transport_mode_Road = 0.0 (+0.07 days)\nETA decreased because:\n  - month = 2.0 (-0.20 days)\n  - route_historical_delay_rate = 0.273 (-0.08 days)\n  - carrier_BlueDart = 1.0 (-0.08 days)\n  - carrier_historical_delay_rate = 0.13 (-0.06 days)"
+      },
+      {
+        "shipment_id": "SHP00026071",
+        "target_type": "regression",
+        "baseline_value": 2.4764,
+        "predicted_value": 3.8524,
+        "positive_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 2080.2,
+            "shap_value": 0.5504,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.2813,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 7.6407,
+            "shap_value": 0.2811,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 1.0,
+            "shap_value": 0.2324,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "month",
+            "feature_value": 2.0,
+            "shap_value": -0.3706,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_type_Urban_Last_Mile",
+            "feature_value": 0.0,
+            "shap_value": -0.0673,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_historical_delay_rate",
+            "feature_value": 0.192,
+            "shap_value": -0.0412,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "quarter",
+            "feature_value": 1.0,
+            "shap_value": -0.0382,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00026071\nPredicted ETA (days): 3.85 (Baseline: 2.48)\nETA increased because:\n  - distance_km = 2080.2 (+0.55 days)\n  - transport_mode_Air = 0.0 (+0.28 days)\n  - log_distance_km = 7.6407 (+0.28 days)\n  - transport_mode_Rail = 1.0 (+0.23 days)\nETA decreased because:\n  - month = 2.0 (-0.37 days)\n  - route_type_Urban_Last_Mile = 0.0 (-0.07 days)\n  - carrier_historical_delay_rate = 0.192 (-0.04 days)\n  - quarter = 1.0 (-0.04 days)"
+      },
+      {
+        "shipment_id": "SHP00097880",
+        "target_type": "regression",
+        "baseline_value": 2.4764,
+        "predicted_value": 2.4349,
+        "positive_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 1509.4,
+            "shap_value": 0.2184,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.2175,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 7.3201,
+            "shap_value": 0.1075,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "vehicle_type_Commercial_Belly_Cargo",
+            "feature_value": 0.0,
+            "shap_value": 0.0354,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "month",
+            "feature_value": 2.0,
+            "shap_value": -0.1963,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_historical_delay_rate",
+            "feature_value": 0.241,
+            "shap_value": -0.0858,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "warehouse_historical_delay_rate",
+            "feature_value": 0.129,
+            "shap_value": -0.0661,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 1.0,
+            "shap_value": -0.0476,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00097880\nPredicted ETA (days): 2.43 (Baseline: 2.48)\nETA increased because:\n  - distance_km = 1509.4 (+0.22 days)\n  - transport_mode_Air = 0.0 (+0.22 days)\n  - log_distance_km = 7.3201 (+0.11 days)\n  - vehicle_type_Commercial_Belly_Cargo = 0.0 (+0.04 days)\nETA decreased because:\n  - month = 2.0 (-0.20 days)\n  - route_historical_delay_rate = 0.241 (-0.09 days)\n  - warehouse_historical_delay_rate = 0.129 (-0.07 days)\n  - transport_mode_Road = 1.0 (-0.05 days)"
+      }
+    ]
+  },
+  "dispatch_regression": {
+    "global": {
+      "target_type": "regression",
+      "total_features": 256,
+      "top_features": [
+        {
+          "rank": 1,
+          "feature": "number_of_stops",
+          "mean_abs_shap": 0.40309
+        },
+        {
+          "rank": 2,
+          "feature": "distance_km",
+          "mean_abs_shap": 0.23754
+        },
+        {
+          "rank": 3,
+          "feature": "congestion_index",
+          "mean_abs_shap": 0.17932
+        },
+        {
+          "rank": 4,
+          "feature": "transport_mode_Air",
+          "mean_abs_shap": 0.15586
+        },
+        {
+          "rank": 5,
+          "feature": "log_distance_km",
+          "mean_abs_shap": 0.14002
+        },
+        {
+          "rank": 6,
+          "feature": "route_complexity_score",
+          "mean_abs_shap": 0.12467
+        },
+        {
+          "rank": 7,
+          "feature": "traffic_weather_interaction",
+          "mean_abs_shap": 0.10611
+        },
+        {
+          "rank": 8,
+          "feature": "transport_mode_Road",
+          "mean_abs_shap": 0.08424
+        },
+        {
+          "rank": 9,
+          "feature": "transport_mode_Rail",
+          "mean_abs_shap": 0.07297
+        },
+        {
+          "rank": 10,
+          "feature": "pickup_to_dispatch_hours",
+          "mean_abs_shap": 0.0645
+        },
+        {
+          "rank": 11,
+          "feature": "weather_risk_score",
+          "mean_abs_shap": 0.06151
+        },
+        {
+          "rank": 12,
+          "feature": "weather_condition_Clear",
+          "mean_abs_shap": 0.05095
+        },
+        {
+          "rank": 13,
+          "feature": "road_condition_Good",
+          "mean_abs_shap": 0.04825
+        },
+        {
+          "rank": 14,
+          "feature": "carrier_BlueDart",
+          "mean_abs_shap": 0.04122
+        },
+        {
+          "rank": 15,
+          "feature": "warehouse_processing_hours",
+          "mean_abs_shap": 0.04074
+        },
+        {
+          "rank": 16,
+          "feature": "transport_mode_Sea",
+          "mean_abs_shap": 0.03659
+        },
+        {
+          "rank": 17,
+          "feature": "customs_clearance_hours",
+          "mean_abs_shap": 0.03242
+        },
+        {
+          "rank": 18,
+          "feature": "stops_per_100km",
+          "mean_abs_shap": 0.02977
+        },
+        {
+          "rank": 19,
+          "feature": "carrier_historical_delay_rate",
+          "mean_abs_shap": 0.02542
+        },
+        {
+          "rank": 20,
+          "feature": "road_condition_Poor",
+          "mean_abs_shap": 0.02393
+        }
+      ],
+      "summary": {
+        "number_of_stops": 0.40309,
+        "distance_km": 0.23754,
+        "congestion_index": 0.17932,
+        "transport_mode_Air": 0.15586,
+        "log_distance_km": 0.14002,
+        "route_complexity_score": 0.12467,
+        "traffic_weather_interaction": 0.10611,
+        "transport_mode_Road": 0.08424,
+        "transport_mode_Rail": 0.07297,
+        "pickup_to_dispatch_hours": 0.0645,
+        "weather_risk_score": 0.06151,
+        "weather_condition_Clear": 0.05095,
+        "road_condition_Good": 0.04825,
+        "carrier_BlueDart": 0.04122,
+        "warehouse_processing_hours": 0.04074,
+        "transport_mode_Sea": 0.03659,
+        "customs_clearance_hours": 0.03242,
+        "stops_per_100km": 0.02977,
+        "carrier_historical_delay_rate": 0.02542,
+        "road_condition_Poor": 0.02393
+      }
+    },
+    "local": [
+      {
+        "shipment_id": "SHP00079204",
+        "target_type": "regression",
+        "baseline_value": 2.4767,
+        "predicted_value": 1.3212,
+        "positive_drivers": [
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.0755,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_BlueDart",
+            "feature_value": 0.0,
+            "shap_value": 0.0202,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "traffic_level_Low",
+            "feature_value": 0.0,
+            "shap_value": 0.0103,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "complexity_per_stop",
+            "feature_value": 0.6725,
+            "shap_value": 0.005,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 690.7,
+            "shap_value": -0.2495,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "number_of_stops",
+            "feature_value": 3.0,
+            "shap_value": -0.1986,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 6.5392,
+            "shap_value": -0.1337,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "route_complexity_score",
+            "feature_value": 2.69,
+            "shap_value": -0.1235,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00079204\nPredicted ETA (days): 1.32 (Baseline: 2.48)\nETA increased because:\n  - transport_mode_Air = 0.0 (+0.08 days)\n  - carrier_BlueDart = 0.0 (+0.02 days)\n  - traffic_level_Low = 0.0 (+0.01 days)\n  - complexity_per_stop = 0.6725 (+0.01 days)\nETA decreased because:\n  - distance_km = 690.7 (-0.25 days)\n  - number_of_stops = 3.0 (-0.20 days)\n  - log_distance_km = 6.5392 (-0.13 days)\n  - route_complexity_score = 2.69 (-0.12 days)"
+      },
+      {
+        "shipment_id": "SHP00055611",
+        "target_type": "regression",
+        "baseline_value": 2.4767,
+        "predicted_value": 3.8307,
+        "positive_drivers": [
+          {
+            "feature": "distance_km",
+            "feature_value": 2896.8,
+            "shap_value": 0.7387,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "number_of_stops",
+            "feature_value": 7.0,
+            "shap_value": 0.5676,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 7.9717,
+            "shap_value": 0.4248,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "route_complexity_score",
+            "feature_value": 5.0,
+            "shap_value": 0.2577,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.551,
+            "shap_value": -0.2067,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0298,
+            "shap_value": -0.1821,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 1.0,
+            "shap_value": -0.0979,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_risk_score",
+            "feature_value": 0.054,
+            "shap_value": -0.0938,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00055611\nPredicted ETA (days): 3.83 (Baseline: 2.48)\nETA increased because:\n  - distance_km = 2896.8 (+0.74 days)\n  - number_of_stops = 7.0 (+0.57 days)\n  - log_distance_km = 7.9717 (+0.42 days)\n  - route_complexity_score = 5.0 (+0.26 days)\nETA decreased because:\n  - congestion_index = 0.551 (-0.21 days)\n  - traffic_weather_interaction = 0.0298 (-0.18 days)\n  - transport_mode_Road = 1.0 (-0.10 days)\n  - weather_risk_score = 0.054 (-0.09 days)"
+      },
+      {
+        "shipment_id": "SHP00063122",
+        "target_type": "regression",
+        "baseline_value": 2.4767,
+        "predicted_value": 2.3915,
+        "positive_drivers": [
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 1.0,
+            "shap_value": 0.2022,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 0.0,
+            "shap_value": 0.1358,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.118,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "stops_per_100km",
+            "feature_value": 0.2314,
+            "shap_value": 0.0645,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "number_of_stops",
+            "feature_value": 3.0,
+            "shap_value": -0.1503,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.356,
+            "shap_value": -0.1162,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0107,
+            "shap_value": -0.1134,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_BlueDart",
+            "feature_value": 1.0,
+            "shap_value": -0.0997,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00063122\nPredicted ETA (days): 2.39 (Baseline: 2.48)\nETA increased because:\n  - transport_mode_Rail = 1.0 (+0.20 days)\n  - transport_mode_Road = 0.0 (+0.14 days)\n  - transport_mode_Air = 0.0 (+0.12 days)\n  - stops_per_100km = 0.2314 (+0.06 days)\nETA decreased because:\n  - number_of_stops = 3.0 (-0.15 days)\n  - congestion_index = 0.356 (-0.12 days)\n  - traffic_weather_interaction = 0.0107 (-0.11 days)\n  - carrier_BlueDart = 1.0 (-0.10 days)"
+      },
+      {
+        "shipment_id": "SHP00026071",
+        "target_type": "regression",
+        "baseline_value": 2.4767,
+        "predicted_value": 4.2504,
+        "positive_drivers": [
+          {
+            "feature": "number_of_stops",
+            "feature_value": 7.0,
+            "shap_value": 0.5804,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "distance_km",
+            "feature_value": 2080.2,
+            "shap_value": 0.3785,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.605,
+            "shap_value": 0.3373,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "log_distance_km",
+            "feature_value": 7.6407,
+            "shap_value": 0.2326,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0369,
+            "shap_value": -0.1468,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "pickup_to_dispatch_hours",
+            "feature_value": 4.3,
+            "shap_value": -0.1052,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_risk_score",
+            "feature_value": 0.061,
+            "shap_value": -0.0955,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.0882,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00026071\nPredicted ETA (days): 4.25 (Baseline: 2.48)\nETA increased because:\n  - number_of_stops = 7.0 (+0.58 days)\n  - distance_km = 2080.2 (+0.38 days)\n  - congestion_index = 0.605 (+0.34 days)\n  - log_distance_km = 7.6407 (+0.23 days)\nETA decreased because:\n  - traffic_weather_interaction = 0.0369 (-0.15 days)\n  - pickup_to_dispatch_hours = 4.3 (-0.11 days)\n  - weather_risk_score = 0.061 (-0.10 days)\n  - weather_condition_Clear = 1.0 (-0.09 days)"
+      },
+      {
+        "shipment_id": "SHP00097880",
+        "target_type": "regression",
+        "baseline_value": 2.4767,
+        "predicted_value": 2.7581,
+        "positive_drivers": [
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.647,
+            "shap_value": 0.2547,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "number_of_stops",
+            "feature_value": 4.0,
+            "shap_value": 0.2485,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.0873,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "distance_km",
+            "feature_value": 1509.4,
+            "shap_value": 0.0799,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0395,
+            "shap_value": -0.108,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Road",
+            "feature_value": 1.0,
+            "shap_value": -0.0919,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_risk_score",
+            "feature_value": 0.061,
+            "shap_value": -0.0682,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "road_condition_Good",
+            "feature_value": 1.0,
+            "shap_value": -0.0632,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00097880\nPredicted ETA (days): 2.76 (Baseline: 2.48)\nETA increased because:\n  - congestion_index = 0.647 (+0.25 days)\n  - number_of_stops = 4.0 (+0.25 days)\n  - transport_mode_Air = 0.0 (+0.09 days)\n  - distance_km = 1509.4 (+0.08 days)\nETA decreased because:\n  - traffic_weather_interaction = 0.0395 (-0.11 days)\n  - transport_mode_Road = 1.0 (-0.09 days)\n  - weather_risk_score = 0.061 (-0.07 days)\n  - road_condition_Good = 1.0 (-0.06 days)"
+      }
+    ]
+  },
+  "dispatch_classification": {
+    "global": {
+      "target_type": "classification",
+      "total_features": 256,
+      "top_features": [
+        {
+          "rank": 1,
+          "feature": "promised_delivery_days",
+          "mean_abs_shap": 2.69132
+        },
+        {
+          "rank": 2,
+          "feature": "service_level_Standard",
+          "mean_abs_shap": 1.9146
+        },
+        {
+          "rank": 3,
+          "feature": "service_level_Economy_Surface",
+          "mean_abs_shap": 1.09614
+        },
+        {
+          "rank": 4,
+          "feature": "transport_mode_Air",
+          "mean_abs_shap": 0.96503
+        },
+        {
+          "rank": 5,
+          "feature": "congestion_index",
+          "mean_abs_shap": 0.88206
+        },
+        {
+          "rank": 6,
+          "feature": "distance_km",
+          "mean_abs_shap": 0.65013
+        },
+        {
+          "rank": 7,
+          "feature": "number_of_stops",
+          "mean_abs_shap": 0.47913
+        },
+        {
+          "rank": 8,
+          "feature": "transport_mode_Rail",
+          "mean_abs_shap": 0.47407
+        },
+        {
+          "rank": 9,
+          "feature": "weather_condition_Clear",
+          "mean_abs_shap": 0.4271
+        },
+        {
+          "rank": 10,
+          "feature": "pickup_to_dispatch_hours",
+          "mean_abs_shap": 0.36799
+        },
+        {
+          "rank": 11,
+          "feature": "priority_level_Low",
+          "mean_abs_shap": 0.35135
+        },
+        {
+          "rank": 12,
+          "feature": "transport_mode_Road",
+          "mean_abs_shap": 0.31548
+        },
+        {
+          "rank": 13,
+          "feature": "traffic_weather_interaction",
+          "mean_abs_shap": 0.29839
+        },
+        {
+          "rank": 14,
+          "feature": "road_condition_Good",
+          "mean_abs_shap": 0.26954
+        },
+        {
+          "rank": 15,
+          "feature": "service_level_Next_Day",
+          "mean_abs_shap": 0.25527
+        },
+        {
+          "rank": 16,
+          "feature": "log_distance_km",
+          "mean_abs_shap": 0.2419
+        },
+        {
+          "rank": 17,
+          "feature": "service_level_Express",
+          "mean_abs_shap": 0.22916
+        },
+        {
+          "rank": 18,
+          "feature": "carrier_BlueDart",
+          "mean_abs_shap": 0.22835
+        },
+        {
+          "rank": 19,
+          "feature": "route_complexity_score",
+          "mean_abs_shap": 0.21203
+        },
+        {
+          "rank": 20,
+          "feature": "complexity_per_stop",
+          "mean_abs_shap": 0.19571
+        }
+      ],
+      "summary": {
+        "promised_delivery_days": 2.69132,
+        "service_level_Standard": 1.9146,
+        "service_level_Economy_Surface": 1.09614,
+        "transport_mode_Air": 0.96503,
+        "congestion_index": 0.88206,
+        "distance_km": 0.65013,
+        "number_of_stops": 0.47913,
+        "transport_mode_Rail": 0.47407,
+        "weather_condition_Clear": 0.4271,
+        "pickup_to_dispatch_hours": 0.36799,
+        "priority_level_Low": 0.35135,
+        "transport_mode_Road": 0.31548,
+        "traffic_weather_interaction": 0.29839,
+        "road_condition_Good": 0.26954,
+        "service_level_Next_Day": 0.25527,
+        "log_distance_km": 0.2419,
+        "service_level_Express": 0.22916,
+        "carrier_BlueDart": 0.22835,
+        "route_complexity_score": 0.21203,
+        "complexity_per_stop": 0.19571
+      }
+    },
+    "local": [
+      {
+        "shipment_id": "SHP00079204",
+        "target_type": "classification",
+        "baseline_value": -4.3706,
+        "predicted_value": -12.1088,
+        "positive_drivers": [
+          {
+            "feature": "service_level_Economy_Surface",
+            "feature_value": 0.0,
+            "shap_value": 0.4659,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.4352,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "weather_risk_score",
+            "feature_value": 0.017,
+            "shap_value": 0.3934,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "route_historical_delay_rate",
+            "feature_value": 0.184,
+            "shap_value": 0.2299,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "service_level_Standard",
+            "feature_value": 1.0,
+            "shap_value": -2.3362,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "promised_delivery_days",
+            "feature_value": 4.3,
+            "shap_value": -1.8631,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "priority_level_Low",
+            "feature_value": 1.0,
+            "shap_value": -0.8954,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.4715,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00079204\nPredicted Delay Probability: -12.11 (Baseline: -4.37)\nDelay risk increased because:\n  - service_level_Economy_Surface = 0.0 (+0.466 log-odds)\n  - transport_mode_Air = 0.0 (+0.435 log-odds)\n  - weather_risk_score = 0.017 (+0.393 log-odds)\n  - route_historical_delay_rate = 0.184 (+0.230 log-odds)\nDelay risk reduced because:\n  - service_level_Standard = 1.0 (-2.336 log-odds)\n  - promised_delivery_days = 4.3 (-1.863 log-odds)\n  - priority_level_Low = 1.0 (-0.895 log-odds)\n  - weather_condition_Clear = 1.0 (-0.471 log-odds)"
+      },
+      {
+        "shipment_id": "SHP00055611",
+        "target_type": "classification",
+        "baseline_value": -4.3706,
+        "predicted_value": -2.479,
+        "positive_drivers": [
+          {
+            "feature": "service_level_Standard",
+            "feature_value": 0.0,
+            "shap_value": 1.6564,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "distance_km",
+            "feature_value": 2896.8,
+            "shap_value": 1.1981,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "number_of_stops",
+            "feature_value": 7.0,
+            "shap_value": 0.7231,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Economy_Surface",
+            "feature_value": 0.0,
+            "shap_value": 0.6555,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "promised_delivery_days",
+            "feature_value": 4.4,
+            "shap_value": -1.3535,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.551,
+            "shap_value": -0.7075,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0298,
+            "shap_value": -0.5011,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.3993,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00055611\nPredicted Delay Probability: -2.48 (Baseline: -4.37)\nDelay risk increased because:\n  - service_level_Standard = 0.0 (+1.656 log-odds)\n  - distance_km = 2896.8 (+1.198 log-odds)\n  - number_of_stops = 7.0 (+0.723 log-odds)\n  - service_level_Economy_Surface = 0.0 (+0.655 log-odds)\nDelay risk reduced because:\n  - promised_delivery_days = 4.4 (-1.353 log-odds)\n  - congestion_index = 0.551 (-0.708 log-odds)\n  - traffic_weather_interaction = 0.0298 (-0.501 log-odds)\n  - weather_condition_Clear = 1.0 (-0.399 log-odds)"
+      },
+      {
+        "shipment_id": "SHP00063122",
+        "target_type": "classification",
+        "baseline_value": -4.3706,
+        "predicted_value": 6.7251,
+        "positive_drivers": [
+          {
+            "feature": "promised_delivery_days",
+            "feature_value": 1.5,
+            "shap_value": 6.8976,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Standard",
+            "feature_value": 0.0,
+            "shap_value": 1.638,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 1.0,
+            "shap_value": 1.2682,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Next_Day",
+            "feature_value": 1.0,
+            "shap_value": 0.8754,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.356,
+            "shap_value": -0.6122,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "carrier_BlueDart",
+            "feature_value": 1.0,
+            "shap_value": -0.4915,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.3322,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "complexity_per_stop",
+            "feature_value": 0.9,
+            "shap_value": -0.2862,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00063122\nPredicted Delay Probability: 6.73 (Baseline: -4.37)\nDelay risk increased because:\n  - promised_delivery_days = 1.5 (+6.898 log-odds)\n  - service_level_Standard = 0.0 (+1.638 log-odds)\n  - transport_mode_Rail = 1.0 (+1.268 log-odds)\n  - service_level_Next_Day = 1.0 (+0.875 log-odds)\nDelay risk reduced because:\n  - congestion_index = 0.356 (-0.612 log-odds)\n  - carrier_BlueDart = 1.0 (-0.491 log-odds)\n  - weather_condition_Clear = 1.0 (-0.332 log-odds)\n  - complexity_per_stop = 0.9 (-0.286 log-odds)"
+      },
+      {
+        "shipment_id": "SHP00026071",
+        "target_type": "classification",
+        "baseline_value": -4.3706,
+        "predicted_value": 3.4421,
+        "positive_drivers": [
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.605,
+            "shap_value": 2.1309,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Standard",
+            "feature_value": 0.0,
+            "shap_value": 1.8141,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 1.0,
+            "shap_value": 1.3236,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "number_of_stops",
+            "feature_value": 7.0,
+            "shap_value": 0.8547,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "promised_delivery_days",
+            "feature_value": 3.6,
+            "shap_value": -0.873,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "pickup_to_dispatch_hours",
+            "feature_value": 4.3,
+            "shap_value": -0.5689,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "traffic_weather_interaction",
+            "feature_value": 0.0369,
+            "shap_value": -0.4324,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.4216,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00026071\nPredicted Delay Probability: 3.44 (Baseline: -4.37)\nDelay risk increased because:\n  - congestion_index = 0.605 (+2.131 log-odds)\n  - service_level_Standard = 0.0 (+1.814 log-odds)\n  - transport_mode_Rail = 1.0 (+1.324 log-odds)\n  - number_of_stops = 7.0 (+0.855 log-odds)\nDelay risk reduced because:\n  - promised_delivery_days = 3.6 (-0.873 log-odds)\n  - pickup_to_dispatch_hours = 4.3 (-0.569 log-odds)\n  - traffic_weather_interaction = 0.0369 (-0.432 log-odds)\n  - weather_condition_Clear = 1.0 (-0.422 log-odds)"
+      },
+      {
+        "shipment_id": "SHP00097880",
+        "target_type": "classification",
+        "baseline_value": -4.3706,
+        "predicted_value": -1.9452,
+        "positive_drivers": [
+          {
+            "feature": "congestion_index",
+            "feature_value": 0.647,
+            "shap_value": 1.6473,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Standard",
+            "feature_value": 0.0,
+            "shap_value": 1.6293,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "service_level_Economy_Surface",
+            "feature_value": 0.0,
+            "shap_value": 0.6727,
+            "direction": "increases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Air",
+            "feature_value": 0.0,
+            "shap_value": 0.5049,
+            "direction": "increases_eta_or_risk"
+          }
+        ],
+        "negative_drivers": [
+          {
+            "feature": "promised_delivery_days",
+            "feature_value": 3.0,
+            "shap_value": -0.9466,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "transport_mode_Rail",
+            "feature_value": 0.0,
+            "shap_value": -0.4339,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "weather_condition_Clear",
+            "feature_value": 1.0,
+            "shap_value": -0.3898,
+            "direction": "decreases_eta_or_risk"
+          },
+          {
+            "feature": "road_condition_Good",
+            "feature_value": 1.0,
+            "shap_value": -0.3667,
+            "direction": "decreases_eta_or_risk"
+          }
+        ],
+        "narrative": "Shipment: SHP00097880\nPredicted Delay Probability: -1.95 (Baseline: -4.37)\nDelay risk increased because:\n  - congestion_index = 0.647 (+1.647 log-odds)\n  - service_level_Standard = 0.0 (+1.629 log-odds)\n  - service_level_Economy_Surface = 0.0 (+0.673 log-odds)\n  - transport_mode_Air = 0.0 (+0.505 log-odds)\nDelay risk reduced because:\n  - promised_delivery_days = 3.0 (-0.947 log-odds)\n  - transport_mode_Rail = 0.0 (-0.434 log-odds)\n  - weather_condition_Clear = 1.0 (-0.390 log-odds)\n  - road_condition_Good = 1.0 (-0.367 log-odds)"
+      }
+    ]
+  }
+}

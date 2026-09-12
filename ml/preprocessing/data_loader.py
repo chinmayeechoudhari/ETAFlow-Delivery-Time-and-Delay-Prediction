@@ -130,3 +130,14 @@ class DataLoader:
         )
         logger.info("Successfully loaded %d records and %d columns.", len(df), len(df.columns))
         return df
+
+
+def load_raw_dataset(
+    raw_data_path: Union[str, Path] = "data/raw/shipments.csv",
+    nrows: Optional[int] = None,
+    verify_checksum: bool = True,
+    parse_dates: bool = False,
+) -> pd.DataFrame:
+    """Convenience function to instantiate DataLoader and read shipment data."""
+    loader = DataLoader(raw_data_path=raw_data_path, verify_checksum=verify_checksum)
+    return loader.load_data(parse_dates=parse_dates, nrows=nrows)

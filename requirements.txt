@@ -10,6 +10,7 @@ numpy
 scikit-learn
 xgboost
 lightgbm
+optuna
 
 # Backend / API
 fastapi
